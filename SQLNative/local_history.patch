@@ -1,0 +1,88 @@
+Index: src/main/java/com/example/databases/databases/DatabasesApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/databases/databases/DatabasesApplication.java b/src/main/java/com/example/databases/databases/DatabasesApplication.java
+--- a/src/main/java/com/example/databases/databases/DatabasesApplication.java	
++++ b/src/main/java/com/example/databases/databases/DatabasesApplication.java	(date 1680862923266)
+@@ -1,9 +1,7 @@
+ package com.example.databases.databases;
+ 
+-import jakarta.persistence.*;
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+-import org.springframework.data.repository.CrudRepository;
+ 
+ @SpringBootApplication
+ public class DatabasesApplication {
+@@ -12,69 +10,4 @@
+ 		SpringApplication.run(DatabasesApplication.class, args);
+ 	}
+ 
+-	@Entity
+-	@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+-	@DiscriminatorColumn(name = "pMode", discriminatorType = DiscriminatorType.STRING)
+-	public abstract static class Payment {
+-		@Id
+-		public int id;
+-		public double amount;
+-
+-		public Payment() {
+-		}
+-
+-		public Payment(int id, double amount) {
+-			this.id = id;
+-			this.amount = amount;
+-		}
+-
+-		public int getId() {
+-			return id;
+-		}
+-
+-		public void setId(int id) {
+-			this.id = id;
+-		}
+-
+-		public double getAmount() {
+-			return amount;
+-		}
+-
+-		public void setAmount(double amount) {
+-			this.amount = amount;
+-		}
+-	}
+-
+-	public static interface PaymentRepository extends CrudRepository<Payment, String> {
+-
+-
+-	}
+-
+-	@Entity
+-	@DiscriminatorValue("cc")
+-	public static class CreditCard extends Payment {
+-		public String creditCard;
+-
+-		public String getCreditCard() {
+-			return creditCard;
+-		}
+-
+-		public void setCreditCard(String creditCard) {
+-			this.creditCard = creditCard;
+-		}
+-	}
+-
+-	@Entity
+-	@DiscriminatorValue("ch")
+-	public static class Check extends Payment {
+-		public String  checkNumber;
+-
+-		public String getCheckNumber() {
+-			return checkNumber;
+-		}
+-
+-		public void setCheckNumber(String checkNumber) {
+-			this.checkNumber = checkNumber;
+-		}
+-	}
+ }
