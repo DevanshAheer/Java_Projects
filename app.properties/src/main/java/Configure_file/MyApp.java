@@ -1,2 +1,5 @@
-package Configure_file;public class MyApp {
+package Configure_file;
+
+public class MyApp {
+    
 }
