@@ -38,28 +38,28 @@ public class MySecurityConfig /*extends WebSecurityConfigurerAdapter */{
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    /*@Override
+    //@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         InMemoryUserDetailsManager userDetailsService = new InMemoryUserDetailsManager();
 
-        UserDetails user = User.withUsername("devansh").password(passwordEncoder.encode("123")).authorities("read").build();
+        UserDetails user = User.withUsername("devansh").password(passwordEncoder.encode("123")).authorities("write").build();
         userDetailsService.createUser(user);
 
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-    }*/
+    }
 
     /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider((AuthenticationProvider) authenticationProvider);
-    }
+    }*/
 
-    @Override
+    //@Override
     protected void configure(HttpSecurity http) throws Exception{
         http.httpBasic();
         http.authorizeRequests().anyRequest().authenticated();
-    }*/
+    }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http, PasswordEncoder passwordEncoder,UserDetailsService userDetailsService) throws Exception
@@ -69,8 +69,9 @@ public class MySecurityConfig /*extends WebSecurityConfigurerAdapter */{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.formLogin();
-        http.authorizeRequests().antMatchers("/dev").authenticated();
+        //http.formLogin();
+        http.httpBasic();
+        http.authorizeRequests().anyRequest().authenticated();
 
         return http.build();
     }

@@ -6,6 +6,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
@@ -20,6 +22,10 @@ public class MySecurityFilter implements Filter {
         System.out.println("after any type of chaining");
     }
 
+    protected void deoFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterchain ) throws ServletException, Exception
+    {
+
+    }
     @Override
     public boolean isLoggable(LogRecord record) {
         return false;
